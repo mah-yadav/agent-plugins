@@ -1,0 +1,17 @@
+{
+  "name": "ask-java-codebase",
+  "version": "1.0.0",
+  "description": "Answer focused questions about a Java codebase using Java-specific expertise (Spring Boot, Quarkus, Micronaut, Jakarta EE, WebFlux, Lombok). Conversational Q&A — no report files, no ledger, no multi-phase ceremony. For producing a written onboarding artifact instead, use the separate `onboard-java` plugin.",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "java",
+    "spring-boot",
+    "quarkus",
+    "micronaut",
+    "webflux",
+    "codebase-qa",
+    "code-explanation"
+  ]
+}

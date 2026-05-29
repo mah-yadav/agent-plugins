@@ -1,0 +1,21 @@
+{
+  "name": "onboard-node",
+  "version": "1.0.0",
+  "description": "Onboard a Node.js developer onto a codebase (JavaScript or TypeScript) by systematically mining the project. Single skill (`onboard-node`) that runs a phased workflow — Phase 1 orient, Phase 2 scope, Phase 3 mine six areas (build/local-dev, architecture, security, observability, CI/CD, code quality), Phase 4 questions, Phase 5 report. All analysis details live in internal reference files; no user-invokable sub-skills.",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "javascript",
+    "typescript",
+    "express",
+    "fastify",
+    "nestjs",
+    "hono",
+    "nextjs",
+    "onboarding",
+    "codebase-analysis"
+  ]
+}

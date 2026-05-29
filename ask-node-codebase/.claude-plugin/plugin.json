@@ -1,0 +1,21 @@
+{
+  "name": "ask-node-codebase",
+  "version": "1.0.0",
+  "description": "Answer focused questions about a Node.js codebase (JavaScript or TypeScript) using Node-specific expertise (Express, Fastify, NestJS, Hono, Next.js API routes, tRPC, Prisma, Drizzle, TypeORM, Zod, decorator-driven codebases, monorepos, ESM/CJS, edge runtimes). Conversational Q&A — no report files, no ledger, no multi-phase ceremony. For producing a written onboarding artifact instead, use the separate `onboard-node` plugin.",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "javascript",
+    "typescript",
+    "express",
+    "fastify",
+    "nestjs",
+    "hono",
+    "nextjs",
+    "codebase-qa",
+    "code-explanation"
+  ]
+}

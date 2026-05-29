@@ -1,0 +1,177 @@
+# Security Analysis Report: [Project Name]
+
+**Date**: [Date]
+**Project**: [groupId:artifactId or project name]
+**Framework**: [Spring Boot X.Y / Micronaut / Quarkus]
+**Security Framework**: [Spring Security X.Y]
+
+---
+
+## 1. Security Stack
+
+| Component          | Technology                                    | Version |
+| ------------------ | --------------------------------------------- | ------- |
+| Security framework |                                               |         |
+| Authentication     | [OAuth2 / JWT / SAML / Basic / API Key]       |         |
+| Identity provider  | [Keycloak / Okta / Auth0 / Azure AD / Custom] |         |
+| Secrets management | [Vault / AWS SM / Env vars / Config Server]   |         |
+| Rate limiting      | [Bucket4j / Resilience4j / None]              |         |
+| Session store      | [Stateless / In-memory / Redis / JDBC]        |         |
+
+## 2. Authentication
+
+### 2.1 Mechanism
+
+| Attribute        | Value       |
+| ---------------- | ----------- |
+| **Type**         |             |
+| **Provider**     |             |
+| **Token format** |             |
+| **Config file**  | [file path] |
+
+### 2.2 Authentication Flow
+
+```mermaid
+[Sequence diagram showing the authentication flow]
+```
+
+### 2.3 JWT Configuration (if applicable)
+
+| Attribute           | Value |
+| ------------------- | ----- |
+| Signing algorithm   |       |
+| Key source          |       |
+| Issuer validation   |       |
+| Audience validation |       |
+| Key claims parsed   |       |
+| Token extraction    |       |
+
+## 3. Authorization
+
+### 3.1 URL Access Matrix
+
+| Path Pattern | HTTP Method | Access Rule | Notes |
+| ------------ | ----------- | ----------- | ----- |
+|              |             |             |       |
+
+### 3.2 Method-Level Security
+
+| Annotation      | Usage Count | Example |
+| --------------- | ----------- | ------- |
+| `@PreAuthorize` |             |         |
+| `@Secured`      |             |         |
+
+### 3.3 Role & Permission Model
+
+| Role | Permissions | Source |
+| ---- | ----------- | ------ |
+|      |             |        |
+
+## 4. Security Infrastructure
+
+### 4.1 CORS
+
+| Attribute         | Value |
+| ----------------- | ----- |
+| Allowed origins   |       |
+| Allowed methods   |       |
+| Allow credentials |       |
+| Config location   |       |
+
+### 4.2 CSRF
+
+| Attribute                   | Value |
+| --------------------------- | ----- |
+| Status                      |       |
+| Justification (if disabled) |       |
+
+### 4.3 Session Management
+
+| Attribute       | Value |
+| --------------- | ----- |
+| Creation policy |       |
+| Session store   |       |
+
+### 4.4 Security Headers
+
+| Header                    | Status | Value |
+| ------------------------- | ------ | ----- |
+| Strict-Transport-Security |        |       |
+| X-Frame-Options           |        |       |
+| X-Content-Type-Options    |        |       |
+| Content-Security-Policy   |        |       |
+
+### 4.5 Rate Limiting
+
+| Attribute | Value |
+| --------- | ----- |
+| Library   |       |
+| Scope     |       |
+| Limits    |       |
+
+## 5. Secrets Management
+
+### 5.1 How Secrets Are Managed
+
+| Attribute      | Value |
+| -------------- | ----- |
+| Primary method |       |
+
+### 5.2 Required Secrets
+
+| Secret | Purpose | Source | Local Dev Setup |
+| ------ | ------- | ------ | --------------- |
+|        |         |        |                 |
+
+## 6. Security Testing
+
+| What's Tested                      | How | Test Location |
+| ---------------------------------- | --- | ------------- |
+| Unauthenticated access returns 401 |     |               |
+| Unauthorized access returns 403    |     |               |
+| Valid auth succeeds                |     |               |
+
+## 7. Local Development Authentication
+
+### 7.1 How to Authenticate Locally
+
+```bash
+# Step-by-step commands
+```
+
+### 7.2 Test Credentials
+
+| User | Password | Role | Purpose |
+| ---- | -------- | ---- | ------- |
+|      |          |      |         |
+
+### 7.3 API Testing
+
+```bash
+# Example authenticated request
+curl -H "Authorization: Bearer [TOKEN]" http://localhost:8080/api/...
+```
+
+## 8. Security Findings
+
+### 8.1 Anti-Patterns Found
+
+| Finding | Severity | Location | Recommendation |
+| ------- | -------- | -------- | -------------- |
+|         |          |          |                |
+
+### 8.2 Missing Security Controls
+
+| Control         | Status                                                                   | Impact |
+| --------------- | ------------------------------------------------------------------------ | ------ |
+| Rate limiting   | [Present / Missing]                                                      |        |
+| CSRF protection | [Present / Disabled with justification / Disabled without justification] |        |
+| Security tests  | [Good / Partial / Missing]                                               |        |
+
+## 9. Things to Ask the Team
+
+- [ ] [Security-specific questions based on findings]
+
+---
+
+*Generated by the security-analysis skill on [Date]*

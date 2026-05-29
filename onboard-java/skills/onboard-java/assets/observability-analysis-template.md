@@ -1,0 +1,180 @@
+# Observability Analysis Report: [Project Name]
+
+**Date**: [Date]
+**Project**: [groupId:artifactId or project name]
+**Framework**: [Spring Boot X.Y / Micronaut / Quarkus]
+
+---
+
+## 1. Observability Stack
+
+| Component         | Technology                                  | Version |
+| ----------------- | ------------------------------------------- | ------- |
+| Logging framework | [Logback / Log4j2]                          |         |
+| Log format        | [Plain text / JSON structured]              |         |
+| Metrics facade    | [Micrometer]                                |         |
+| Metrics backend   | [Prometheus / Datadog / CloudWatch / None]  |         |
+| Tracing library   | [Micrometer Tracing / Sleuth / OTel / None] |         |
+| Trace export      | [Zipkin / Jaeger / Tempo / OTLP / None]     |         |
+| Error tracking    | [Sentry / Elastic APM / None]               |         |
+| Actuator          | [Yes / No]                                  |         |
+
+## 2. Logging
+
+### 2.1 Configuration
+
+| Attribute           | Value                                 |
+| ------------------- | ------------------------------------- |
+| Config file         | [path]                                |
+| Root log level      | [INFO / DEBUG / WARN]                 |
+| Log format          | [Plain text / JSON structured]        |
+| Output destinations | [Console / File / Logstash / Fluentd] |
+
+### 2.2 Log Format Example
+
+```
+[Example log line in the configured format]
+```
+
+### 2.3 MDC Context
+
+| MDC Field | Purpose | Where Set |
+| --------- | ------- | --------- |
+|           |         |           |
+
+### 2.4 Profile-Specific Logging
+
+| Profile | Format | Level | Destinations |
+| ------- | ------ | ----- | ------------ |
+| local   |        |       |              |
+| prod    |        |       |              |
+
+### 2.5 How to Read Logs Locally
+
+```bash
+# Logs appear at: [console / file path]
+
+# Change log level at runtime (if Actuator exposed):
+curl -X POST http://localhost:[port]/actuator/loggers/[logger.name] \
+  -H "Content-Type: application/json" \
+  -d '{"configuredLevel": "DEBUG"}'
+```
+
+## 3. Metrics
+
+### 3.1 Metrics Export
+
+| Attribute   | Value |
+| ----------- | ----- |
+| Registry    |       |
+| Endpoint    |       |
+| Common tags |       |
+
+### 3.2 Auto-Configured Metrics
+
+| Category    | Active     | Key Metrics |
+| ----------- | ---------- | ----------- |
+| JVM         | [Yes / No] |             |
+| HTTP server | [Yes / No] |             |
+| Database    | [Yes / No] |             |
+| Cache       | [Yes / No] |             |
+| Kafka       | [Yes / No] |             |
+
+### 3.3 Custom Metrics
+
+| Metric Name | Type | What It Measures | Location |
+| ----------- | ---- | ---------------- | -------- |
+|             |      |                  |          |
+
+## 4. Health Checks
+
+### 4.1 Configuration
+
+| Attribute         | Value |
+| ----------------- | ----- |
+| Endpoint path     |       |
+| Show details      |       |
+| Kubernetes probes |       |
+
+### 4.2 Health Indicators
+
+| Indicator | Type | What It Checks | Health Group |
+| --------- | ---- | -------------- | ------------ |
+|           |      |                |              |
+
+### 4.3 Check Health Locally
+
+```bash
+curl http://localhost:[port]/actuator/health | jq
+```
+
+## 5. Distributed Tracing
+
+### 5.1 Configuration
+
+| Attribute          | Value |
+| ------------------ | ----- |
+| Library            |       |
+| Propagation format |       |
+| Export destination |       |
+| Sampling rate      |       |
+
+### 5.2 Auto-Instrumented
+
+| Component   | Traced     |
+| ----------- | ---------- |
+| HTTP server | [Yes / No] |
+| HTTP client | [Yes / No] |
+| Database    | [Yes / No] |
+| Messaging   | [Yes / No] |
+
+### 5.3 Custom Spans
+
+| Span Name | Location | Purpose |
+| --------- | -------- | ------- |
+|           |          |         |
+
+## 6. Actuator Endpoints
+
+| Endpoint | Path | Purpose | Security |
+| -------- | ---- | ------- | -------- |
+|          |      |         |          |
+
+## 7. Debugging Cheat Sheet
+
+| Scenario        | What to Do |
+| --------------- | ---------- |
+| API returns 500 |            |
+| Slow endpoint   |            |
+| Database issues |            |
+| Memory issues   |            |
+
+### Useful Commands
+
+```bash
+# View available metrics
+curl http://localhost:[port]/actuator/metrics | jq '.names[]'
+
+# View specific metric
+curl http://localhost:[port]/actuator/metrics/http.server.requests | jq
+
+# Thread dump
+curl http://localhost:[port]/actuator/threaddump | jq
+```
+
+## 8. Observability Gaps
+
+| Gap | Impact | Recommendation |
+| --- | ------ | -------------- |
+|     |        |                |
+
+## 9. Things to Ask the Team
+
+- [ ] Where are the dashboards?
+- [ ] How do I access the log aggregator?
+- [ ] What alerts are configured?
+- [ ] Are there SLOs defined?
+
+---
+
+*Generated by the observability-analysis skill on [Date]*

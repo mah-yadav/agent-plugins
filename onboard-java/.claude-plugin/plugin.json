@@ -1,0 +1,17 @@
+{
+  "name": "onboard-java",
+  "version": "1.0.0",
+  "description": "Onboard a Java developer onto a codebase by systematically mining the project. Single skill (`onboard-java`) that runs a phased workflow — Phase 1 orient, Phase 2 scope, Phase 3 mine six areas (build/local-dev, architecture, security, observability, CI/CD, code quality), Phase 4 questions, Phase 5 report. All analysis details live in internal reference files; no user-invokable sub-skills.",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "java",
+    "onboarding",
+    "spring-boot",
+    "quarkus",
+    "micronaut",
+    "webflux",
+    "codebase-analysis"
+  ]
+}

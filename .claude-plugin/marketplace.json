@@ -1,0 +1,32 @@
+{
+  "name": "agent-plugins",
+  "owner": {
+    "name": "Mahesh Yadav"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for onboarding onto and asking questions about Java and Node.js codebases.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ask-java-codebase",
+      "source": "./ask-java-codebase",
+      "description": "Answer focused questions about a Java codebase (Spring Boot, Quarkus, Micronaut, Jakarta EE, WebFlux, Lombok). Conversational, evidence-first Q&A."
+    },
+    {
+      "name": "ask-node-codebase",
+      "source": "./ask-node-codebase",
+      "description": "Answer focused questions about a Node.js codebase (Express, Fastify, NestJS, Hono, Next.js, tRPC, Prisma/Drizzle/TypeORM, monorepos). Conversational, evidence-first Q&A."
+    },
+    {
+      "name": "onboard-java",
+      "source": "./onboard-java",
+      "description": "Onboard a developer onto a Java codebase via a phased workflow that mines build, architecture, security, observability, CI/CD, and code quality, then produces a written report."
+    },
+    {
+      "name": "onboard-node",
+      "source": "./onboard-node",
+      "description": "Onboard a developer onto a Node.js codebase via a phased workflow that mines build, architecture, security, observability, CI/CD, and code quality, then produces a written report."
+    }
+  ]
+}
