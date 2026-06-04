@@ -79,7 +79,7 @@ Where would I add a new REST endpoint?
 
 ## Follow-up rounds
 
-Most real sessions have 2–6 follow-up questions building on the same investigation. The plugin caches what it's already learned about the project, so you can pivot to a new area or drill deeper without restarting.
+Most real sessions have 2–6 follow-up questions building on the same investigation. Within a session it reuses what it has already learned — the project sniff, the files it has already read — so you can pivot to a new area or drill deeper without re-investigating from scratch. State lives in the conversation rather than a file, so it doesn't carry across separate sessions (see *Honest trade-offs*).
 
 ## What's inside
 
@@ -87,12 +87,18 @@ Most real sessions have 2–6 follow-up questions building on the same investiga
 ask-java-codebase/
 ├── .claude-plugin/plugin.json
 └── skills/ask-java-codebase/
-    ├── SKILL.md                       ← Q&A workflow + Java traps + routing
-    └── references/
-        └── java-analysis-guide.md     ← Java framework + Lombok + reactive guide
+    ├── SKILL.md                            ← Q&A workflow + Java traps + routing
+    └── references/                         ← one file per concern, loaded on demand
+        ├── foundation.md                   ← project ID, framework detection, DI, Lombok
+        ├── control-flow.md                 ← request lifecycle, exceptions, async/reactive
+        ├── data-layer.md                   ← JPA, repositories, transactions, caching, NoSQL
+        ├── integrations.md                 ← messaging, HTTP clients, gRPC, GraphQL, OpenAPI
+        ├── testing.md                      ← JUnit/Mockito/Testcontainers, coverage
+        ├── patterns.md                     ← design patterns + modern Java features
+        └── security-and-anti-patterns.md   ← how security is set up + common code smells
 ```
 
-The plugin loads sections of `java-analysis-guide.md` on demand based on the question shape (framework detection / control flow / data layer / security / testing / design patterns / anti-patterns). It does not pre-load the whole guide.
+The reference knowledge is split one file per concern. SKILL.md routes each question to the matching file(s) and `Read`s only those — a single clean whole-file load each, never the whole knowledge base at once.
 
 ## Scope and limits
 
@@ -110,7 +116,7 @@ The plugin loads sections of `java-analysis-guide.md` on demand based on the que
 
 ## Version
 
-v1.0.0 — initial release. Shares `java-analysis-guide.md` (verbatim) with the sibling `onboard-java` plugin. Parallel to the `ask-node-codebase` plugin.
+v1.0.0 — initial release. The Java analysis knowledge is split into per-concern reference files under `references/` for clean on-demand loading. Parallel to the `ask-node-codebase` plugin.
 
 ## Author
 
