@@ -6,18 +6,26 @@ Reference for Phase 3.1 of the onboarding workflow. Loaded by the orchestrator w
 
 **Core principle**: From zero to running in one document. The output should let a developer go from a fresh clone to a running application with passing tests, without asking anyone for help.
 
+## Contents
+
+- Step 1: Identify the Build System
+- Step 2: Mine Build Configuration (2.1 Build Commands, 2.2 Docker, 2.3 Environment Config, 2.4 Local Services, 2.5 IDE Tooling, 2.6 Scripts)
+- Step 3: Verify (OFF by default)
+- Step 4: Generate Local Dev Guide
+- Ledger update, exploration guidelines
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
 |---|---|---|
-| 3.1 Build Commands & Plugins | **P0** | Can't do anything without building |
-| 3.2 Docker & Container Setup | **P0** | Most projects need local services |
-| 3.3 Environment Configuration | **P0** | App won't start without config |
-| 3.4 Local Services & Dependencies | **P0** | App needs its dependencies running |
-| 3.5 IDE & Developer Tooling | **P1** | Important but not day-1 blocker |
-| 3.6 Scripts & Automation | **P1** | Helpful but not essential |
+| 2.1 Build Commands & Plugins | **P0** | Can't do anything without building |
+| 2.2 Docker & Container Setup | **P0** | Most projects need local services |
+| 2.3 Environment Configuration | **P0** | App won't start without config |
+| 2.4 Local Services & Dependencies | **P0** | App needs its dependencies running |
+| 2.5 IDE & Developer Tooling | **P1** | Important but not day-1 blocker |
+| 2.6 Scripts & Automation | **P1** | Helpful but not essential |
 
-**Quick mode**: Complete Steps 1, 3.1–3.4, and 5 (generate report). Skip 3.5, 3.6.
+**Quick mode**: Complete Step 1, Steps 2.1–2.4, and Step 4 (generate report). Skip 2.5, 2.6, and Step 3 (verify).
 
 ## Ledger Read-Before
 

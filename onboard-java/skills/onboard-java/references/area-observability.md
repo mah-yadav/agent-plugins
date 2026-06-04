@@ -4,21 +4,33 @@ Reference for Phase 3.4 of the onboarding workflow. Produces a structured report
 
 **Core principle**: If you can't observe it, you can't debug it. Map the entire observability surface so the developer knows what's logged, what's measured, how requests are traced, and where to look when something goes wrong.
 
+## Contents
+
+- Step 1: Identify the Observability Stack
+- Step 2: Analyze Logging (2.1 config, 2.2 structured/MDC, 2.3 patterns)
+- Step 3: Analyze Metrics (3.1–3.4)
+- Step 4: Analyze Health Checks (4.1 config, 4.2 indicators, 4.3 local check)
+- Step 5: Analyze Distributed Tracing (5.1–5.3)
+- Step 6: Analyze Actuator Endpoints
+- Step 7: Error Tracking & Debugging Cheat Sheet (7.1 cheat sheet, 7.2 error tracking)
+- Step 8: Generate Observability Report
+- Ledger update, exploration guidelines
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
 |---|---|---|
-| Step 3: Logging config + how to read logs | **P0** | Day-1 debugging essential |
-| Step 5: Health checks | **P0** | Must verify app is running |
-| Step 8: Debugging cheat sheet | **P0** | Practical debugging commands |
-| Step 4: Metrics | **P1** | Important for understanding system behavior |
-| Step 6: Distributed tracing | **P1** | Important for multi-service debugging |
-| Step 7: Actuator endpoints | **P1** | Useful operational knowledge |
-| Step 4.3: Custom metrics inventory | **P2** | Detailed, not day-1 essential |
-| Step 6.3: Custom spans inventory | **P2** | Detailed, not day-1 essential |
-| Step 8.2: Error tracking deep dive | **P2** | Only if on-call |
+| Step 2: Logging config + how to read logs | **P0** | Day-1 debugging essential |
+| Step 4: Health checks | **P0** | Must verify app is running |
+| Step 7.1: Debugging cheat sheet | **P0** | Practical debugging commands |
+| Step 3: Metrics | **P1** | Important for understanding system behavior |
+| Step 5: Distributed tracing | **P1** | Important for multi-service debugging |
+| Step 6: Actuator endpoints | **P1** | Useful operational knowledge |
+| Step 3.3: Custom metrics inventory | **P2** | Detailed, not day-1 essential |
+| Step 5.3: Custom spans inventory | **P2** | Detailed, not day-1 essential |
+| Step 7.2: Error tracking deep dive | **P2** | Only if on-call |
 
-**Quick mode**: Complete Steps 1, 3.1 (logging config), 5.1 (health endpoint), and produce a minimal debugging cheat sheet. Skip all other steps.
+**Quick mode**: Complete Step 1, Step 2.1 (logging config), Step 4.1 (health endpoint), and Step 7.1 (minimal debugging cheat sheet). Skip all other steps.
 
 ## Ledger Read-Before
 
@@ -195,9 +207,9 @@ Sentry, Elastic APM, dead letter queues, alert annotations.
 
 Write the report using the [observability template](../assets/observability-analysis-template.md).
 
-**Quick mode**: Fill sections 1 (Stack), 2.1 (Logging config), 4.1 (Health endpoint), 8 (Debugging cheat sheet). Mark other sections `[Not analyzed — out of scope for Quick mode]`.
+**Quick mode**: Fill template sections 1 (Stack), 2 (Logging config), 4 (Health Checks), 7 (Debugging Cheat Sheet). Mark other sections `[Not analyzed — out of scope for Quick mode]`.
 
-Default location: `<output-dir>/observability-analysis-report.md` (Standard/Deep only).
+Default location: `<output-dir>/observability-analysis-report.md` (Deep mode only — in Standard mode, observability findings roll into the main report).
 
 ## Ledger Update After
 

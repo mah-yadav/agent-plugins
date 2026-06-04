@@ -4,22 +4,33 @@ Reference for Phase 3.6 of the onboarding workflow. Produces a structured report
 
 **Core principle**: Know what will reject your code before you write it. Nothing slows onboarding more than PR failures from unknown conventions.
 
+## Contents
+
+- Step 1: Identify the Code Quality Stack
+- Step 2: Analyze Static Analysis (2.1 Checkstyle, 2.2 PMD, 2.3 SpotBugs, 2.4 Error Prone, 2.5 Sonar)
+- Step 3: Analyze Code Formatting (3.1 formatter, 3.2 EditorConfig, 3.3 IDE, 3.4 import ordering)
+- Step 4: Analyze Architecture Tests (ArchUnit)
+- Step 5: Analyze Dependency Management (5.1–5.3)
+- Step 6: Analyze Git Hooks & Commit Conventions (6.1–6.3)
+- Step 7: Generate Report
+- Ledger update, exploration guidelines
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
 |---|---|---|
 | Step 1: Identify quality stack | **P0** | Must know what's enforced |
-| Step 4.1: Formatting tool + auto-format command | **P0** | Most common PR failure for new devs |
-| Step 3 (summary): Which static analysis tools fail the build | **P0** | Must know what blocks PRs |
-| Step 5: Architecture tests (ArchUnit) | **P1** | Must know layer rules |
-| Step 3 (detail): Checkstyle/PMD/SpotBugs rule details | **P1** | Important for understanding violations |
-| Step 4.3–4.4: IDE setup, import ordering | **P1** | Important for first-day setup |
-| Step 6: Dependency management | **P1** | How to add dependencies correctly |
-| Step 7: Git hooks & commit conventions | **P1** | Workflow conventions |
-| Step 3.4–3.5: Error Prone, SonarQube details | **P2** | Deep detail |
-| Step 6.3: License compliance | **P2** | Rarely blocks development |
+| Step 3.1: Formatting tool + auto-format command | **P0** | Most common PR failure for new devs |
+| Step 2 (summary): Which static analysis tools fail the build | **P0** | Must know what blocks PRs |
+| Step 4: Architecture tests (ArchUnit) | **P1** | Must know layer rules |
+| Step 2 (detail): Checkstyle/PMD/SpotBugs rule details | **P1** | Important for understanding violations |
+| Step 3.3–3.4: IDE setup, import ordering | **P1** | Important for first-day setup |
+| Step 5: Dependency management | **P1** | How to add dependencies correctly |
+| Step 6: Git hooks & commit conventions | **P1** | Workflow conventions |
+| Step 2.4–2.5: Error Prone, SonarQube details | **P2** | Deep detail |
+| Step 5.3: License compliance | **P2** | Rarely blocks development |
 
-**Quick mode**: Complete Step 1, Step 3 (summary: which tools fail the build), Step 4.1 (format command). Skip everything else.
+**Quick mode**: Complete Step 1, Step 2 (summary: which tools fail the build), Step 3.1 (format command). Skip everything else.
 
 ## Ledger Read-Before
 
@@ -179,7 +190,7 @@ Write the report using the [code quality template](../assets/code-quality-templa
 
 **Quick mode**: Fill sections 1 (Quality Stack), 3.1 (Formatter with commands), and the "What Will Fail My PR?" table. Mark other sections `[Not analyzed — out of scope for Quick mode]`.
 
-Default location: `<output-dir>/code-quality-report.md` (Standard/Deep only).
+Default location: `<output-dir>/code-quality-report.md` (Deep mode only — in Standard mode, code-quality findings roll into the main report).
 
 ## Ledger Update After
 

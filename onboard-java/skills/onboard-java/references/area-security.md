@@ -4,21 +4,32 @@ Reference for Phase 3.3 of the onboarding workflow. Produces a structured securi
 
 **Core principle**: Understand the security model before you write code. Security misconfigurations are the most common source of vulnerabilities.
 
+## Contents
+
+- Step 1: Identify the Security Stack
+- Step 2: Analyze Authentication (2.0 servlet/reactive branch, 2.1 mechanism, 2.2 JWT, 2.3 user details)
+- Step 3: Analyze Authorization (3.1 URL-based, 3.2 method-level, 3.3 role model)
+- Step 4: Analyze Security Infrastructure (4.1 CORS … 4.6 secrets, 4.7 filters)
+- Step 5: Security Testing
+- Step 6: Local Development Authentication
+- Step 7: Generate Security Report
+- Anti-patterns checklist, exploration guidelines
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
 |---|---|---|
-| Step 3: Authentication | **P0** | Must know how auth works to make any API call |
-| Step 4.1: URL-Based Authorization | **P0** | Must know which endpoints are public vs. protected |
-| Step 5.6: Secrets Management | **P0** | Must know how to configure secrets locally |
-| Step 7: Local Dev Auth | **P0** | Must authenticate locally to develop |
-| Step 4.2–4.3: Method-Level Security & Role Model | **P1** | Important for writing secured code |
-| Step 5.1–5.4: CORS, CSRF, Sessions, Headers | **P1** | Important but not day-1 blockers |
-| Step 6: Security Testing | **P1** | Need to write security-aware tests |
-| Step 5.5: Rate Limiting | **P2** | Rarely blocks development |
-| Step 5.7: Security Filters deep dive | **P2** | Only for security-focused work |
+| Step 2: Authentication | **P0** | Must know how auth works to make any API call |
+| Step 3.1: URL-Based Authorization | **P0** | Must know which endpoints are public vs. protected |
+| Step 4.6: Secrets Management | **P0** | Must know how to configure secrets locally |
+| Step 6: Local Dev Auth | **P0** | Must authenticate locally to develop |
+| Step 3.2–3.3: Method-Level Security & Role Model | **P1** | Important for writing secured code |
+| Step 4.1–4.4: CORS, CSRF, Sessions, Headers | **P1** | Important but not day-1 blockers |
+| Step 5: Security Testing | **P1** | Need to write security-aware tests |
+| Step 4.5: Rate Limiting | **P2** | Rarely blocks development |
+| Step 4.7: Security Filters deep dive | **P2** | Only for security-focused work |
 
-**Quick mode**: Complete Steps 1, 3.1 (auth mechanism summary), 5.6 (secrets), 7 (local dev auth). Skip everything else.
+**Quick mode**: Complete Step 1, Step 2.1 (auth mechanism summary), Step 4.6 (secrets), Step 6 (local dev auth). Skip everything else.
 
 ## Ledger Read-Before
 
@@ -241,7 +252,7 @@ Write the report using the [security analysis template](../assets/security-analy
 
 **Standard/Deep mode**: Fill all sections.
 
-Default location: `<output-dir>/security-analysis-report.md` (Standard/Deep only).
+Default location: `<output-dir>/security-analysis-report.md` (Deep mode only — in Standard mode, security findings roll into the main report).
 
 ## Ledger Update After
 

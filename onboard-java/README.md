@@ -53,7 +53,7 @@ The plugin auto-detects project size and recommends a mode in Phase 2; you can o
 Standard Claude Code plugin install — drop the plugin directory under `~/.claude/plugins/` or wherever your Claude Code instance loads plugins from:
 
 ```
-~/.claude/plugins/onboard/
+~/.claude/plugins/onboard-java/
 ```
 
 After installing, the `onboard-java` skill becomes discoverable.
@@ -91,7 +91,7 @@ The plugin runs a staleness check — `git log` since the ledger's last-updated 
 ## What's inside
 
 ```
-onboard/
+onboard-java/
 ├── .claude-plugin/plugin.json
 └── skills/onboard-java/
     ├── SKILL.md                       ← orchestrator: tiers, ledger contract, subagent rules
@@ -103,7 +103,8 @@ onboard/
     │   ├── area-observability.md      ← Phase 3.4 detail
     │   ├── area-cicd-deployment.md    ← Phase 3.5 detail
     │   ├── area-code-quality.md       ← Phase 3.6 detail
-    │   └── java-analysis-guide.md     ← Java framework + Lombok + reactive guide
+    │   ├── java-core-analysis.md      ← Java essentials: frameworks, DI/Lombok, control flow (always loaded)
+    │   └── java-deep-analysis.md      ← Java depth: data, patterns, testing, security (on demand)
     └── assets/
         ├── onboarding-report-template.md
         └── (six standalone report templates)
@@ -127,7 +128,7 @@ The `references/` files are internal building blocks loaded on demand — they a
 
 ## Version
 
-v3.0.0 — single-skill architecture; internal references loaded on demand; reactive-stack / Lombok / multi-module / generated-code handling included.
+v1.0.0 — single-skill architecture; internal references loaded on demand; reactive-stack / Lombok / multi-module / generated-code handling included.
 
 ## Author
 

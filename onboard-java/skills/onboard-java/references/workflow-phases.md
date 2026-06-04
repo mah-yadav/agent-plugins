@@ -4,6 +4,16 @@ The phase-by-phase walkthrough for the onboarding workflow. Loaded by `SKILL.md`
 
 The output is a practical onboarding report — not a code explanation, but a **developer operations guide**: how to build, test, deploy, and work with the project day-to-day.
 
+## Contents
+
+- Core principle, tools
+- Phase 1: Identify & Orient (project discovery, size, multi-module recipe, output dir, ledger + report skeleton)
+- Phase 2: Scope & Prioritize (mode, experience level, priority areas, depth calibration)
+- Phase 3: Systematic Codebase Mining (area priority-by-mode table + areas 3.1–3.6)
+- Phase 4: Compile "Still Need to Ask" List
+- Phase 5: Finalize Onboarding Report (output-by-mode table)
+- Exploration & conversational guidelines
+
 ## Core Principle
 
 **Mine the codebase first, ask people later.** Extract the 60–70% of onboarding knowledge that lives in the code, config files, and project structure — so the developer arrives at their first team conversations with informed questions, not blank-slate ones.
@@ -38,7 +48,7 @@ Establish the project landscape quickly.
 
 5. **Identify the tech stack**: From dependencies, identify frameworks, libraries, and tools. Detect:
    - **Reactive stack**: `spring-boot-starter-webflux`, `reactor-core`, `quarkus-resteasy-reactive`, `mutiny`. If present, record `Reactive stack? = Yes` in the ledger — this changes how Phase 3.2 (explain-code), 3.3 (security), and 3.4 (observability) analyze code.
-   - **Lombok**: `org.projectlombok:lombok` dependency. If present, record `Lombok present? = Yes` — Phase 3.2 will need the Lombok-aware reading rules in `java-analysis-guide.md`.
+   - **Lombok**: `org.projectlombok:lombok` dependency. If present, record `Lombok present? = Yes` — Phase 3.2 will need the Lombok-aware reading rules in `java-core-analysis.md`.
 
 6. **Detect non-standard layout**: Check for deviations that affect how subsequent phases explore:
 
@@ -162,10 +172,10 @@ Explore each area methodically. **Load each area's reference file via `Read`**, 
 |---|---|---|---|
 | 3.1 Build & Local Dev | Full analysis | Full + standalone report | Full + standalone report |
 | 3.2 Architecture/APIs/Data/Testing | Summary tables (P0 rows of `area-explain-code.md`) | Full + standalone report | Full + standalone report |
-| 3.3 Security | Auth mechanism + local dev auth only | Full analysis + standalone report | Full + standalone report |
-| 3.4 Observability | Log location + health endpoint only | Summary | Full + standalone report |
-| 3.5 CI/CD & Deployment | Pipeline stages + "what fails my PR" only | Full analysis + standalone report | Full + standalone report |
-| 3.6 Code Quality | Format command + PR fail checklist only | Full analysis + standalone report | Full + standalone report |
+| 3.3 Security | Auth mechanism + local dev auth only | Full analysis (in main report) | Full + standalone report |
+| 3.4 Observability | Log location + health endpoint only | Summary (in main report) | Full + standalone report |
+| 3.5 CI/CD & Deployment | Pipeline stages + "what fails my PR" only | Full analysis (in main report) | Full + standalone report |
+| 3.6 Code Quality | Format command + PR fail checklist only | Full analysis (in main report) | Full + standalone report |
 
 A row tagged "Summary only" in Quick mode produces a section whose content is exactly the per-area "Minimum viable output" or "Quick mode" snippet. Any other P1/P2 content for that section is replaced with `[Not analyzed — out of scope for Quick mode]`.
 
@@ -189,7 +199,7 @@ Incorporate key findings into the onboarding report's "Build & Run Locally" sect
 
 **Goal**: How is the code structured, what APIs does it expose/consume, how does it manage data, and how does the team test?
 
-**Load**: `Read` [references/area-explain-code.md](./area-explain-code.md) and follow its steps. It in turn refers to [references/java-analysis-guide.md](./java-analysis-guide.md) — read Essential Analysis always; read Extended Analysis only in Standard/Deep mode or when analyzing data layer, design patterns, testing, or security in depth.
+**Load**: `Read` [references/area-explain-code.md](./area-explain-code.md) and follow its steps. It in turn loads [references/java-core-analysis.md](./java-core-analysis.md) (always) and [references/java-deep-analysis.md](./java-deep-analysis.md) (Standard/Deep mode, or when analyzing data layer, design patterns, testing, or security in depth).
 
 **Boundary with other areas**: `area-explain-code` should identify but NOT deeply analyze Spring Security, quality tools, or logging/metrics — those belong to 3.3, 3.6, and 3.4 respectively.
 

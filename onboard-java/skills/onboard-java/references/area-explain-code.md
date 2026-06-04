@@ -2,23 +2,31 @@
 
 Reference for Phase 3.2 of the onboarding workflow. Produces a structured code explanation covering architecture, control flow, data flow, design patterns, and testing.
 
-Specializes in **Java** (Spring Boot, Quarkus, Micronaut, Jakarta EE). Always pair this reference with [java-analysis-guide.md](./java-analysis-guide.md).
+Specializes in **Java** (Spring Boot, Quarkus, Micronaut, Jakarta EE). Always pair this reference with the Java analysis guides ([java-core-analysis.md](./java-core-analysis.md) always; [java-deep-analysis.md](./java-deep-analysis.md) for depth).
+
+## Contents
+
+- Boundaries, ledger read-before, Lombok/reactive/symbol-tracing notes
+- Step 1: Load the Java analysis guides
+- Step 2: Deep Analysis (2.1 Architecture, 2.2 Dependencies, 2.3 Data Flow, 2.4 Control Flow, 2.5 Design Patterns, 2.6 Testing)
+- Step 3: Synthesize and Document
+- Ledger update, conversational rules
 
 ## Priority Tiers (within this area)
 
 | Section | Priority | Rationale |
 |---|---|---|
-| 3.1 Architecture and Structure | **P0** | Foundation for everything else |
-| 3.2 Dependencies and Integrations | **P1** | Deep coverage belongs in Standard+ |
-| 3.3 Data Flow (key entities only) | **P0** | Top-5 entity table is day-1 essential |
-| 3.3 Data Flow (full schema, transactions, caching) | **P1** | Deeper detail |
-| 3.4 Control Flow (one representative request) | **P0** | One end-to-end trace is day-1 essential |
-| 3.4 Control Flow (full endpoint map, error handling, async) | **P1** | Deeper detail |
-| 3.5 Design Patterns | **P1** | Important but not day-1 blocking |
-| 3.6 Testing (commands + frameworks) | **P0** | Devs must be able to run tests on day 1 |
-| 3.6 Testing (strategy, mocking, coverage detail) | **P1** | Useful for writing tests |
+| 2.1 Architecture and Structure | **P0** | Foundation for everything else |
+| 2.2 Dependencies and Integrations | **P1** | Deep coverage belongs in Standard+ |
+| 2.3 Data Flow (key entities only) | **P0** | Top-5 entity table is day-1 essential |
+| 2.3 Data Flow (full schema, transactions, caching) | **P1** | Deeper detail |
+| 2.4 Control Flow (one representative request) | **P0** | One end-to-end trace is day-1 essential |
+| 2.4 Control Flow (full endpoint map, error handling, async) | **P1** | Deeper detail |
+| 2.5 Design Patterns | **P1** | Important but not day-1 blocking |
+| 2.6 Testing (commands + frameworks) | **P0** | Devs must be able to run tests on day 1 |
+| 2.6 Testing (strategy, mocking, coverage detail) | **P1** | Useful for writing tests |
 
-**Quick mode**: 3.1 summary, 3.3 key entities, 3.4 one representative flow, 3.6 commands+frameworks. Skip 3.2 and 3.5.
+**Quick mode**: 2.1 summary, 2.3 key entities, 2.4 one representative flow, 2.6 commands+frameworks. Skip 2.2 and 2.5.
 
 ## Boundaries — Identify-Don't-Deep-Dive
 
@@ -41,27 +49,27 @@ Claude Code doesn't render diagrams in chat. Embed Mermaid blocks directly in th
 
 ## Lombok-Aware Reading
 
-If the build file lists `org.projectlombok:lombok` (check the ledger's `Lombok present?` field), the code you `Read` is incomplete — constructors, getters, setters, `equals`/`hashCode`/`toString`, builders, and loggers are generated at compile time and invisible in source. Before drawing conclusions about a class's dependencies, mutability, or available methods, consult the **Lombok-Aware Reading** subsection of [java-analysis-guide.md](./java-analysis-guide.md) and apply the annotation→generated-code mapping. In particular, `@RequiredArgsConstructor` + `final` fields is the canonical constructor-injection pattern for many Spring codebases — do not flag the absence of an explicit constructor.
+If the build file lists `org.projectlombok:lombok` (check the ledger's `Lombok present?` field), the code you `Read` is incomplete — constructors, getters, setters, `equals`/`hashCode`/`toString`, builders, and loggers are generated at compile time and invisible in source. Before drawing conclusions about a class's dependencies, mutability, or available methods, consult the **Lombok-Aware Reading** subsection of [java-core-analysis.md](./java-core-analysis.md) and apply the annotation→generated-code mapping. In particular, `@RequiredArgsConstructor` + `final` fields is the canonical constructor-injection pattern for many Spring codebases — do not flag the absence of an explicit constructor.
 
 ## Reactive Stack Check
 
-If the ledger marks `Reactive stack?` as WebFlux/Mutiny/Reactor, **read the Reactive sections of [java-analysis-guide.md](./java-analysis-guide.md) before tracing control flow**. The request lifecycle, security filter chain, error handling, and threading model differ fundamentally from Spring MVC. Misreading a WebFlux app as MVC produces wrong sequence diagrams and wrong analysis.
+If the ledger marks `Reactive stack?` as WebFlux/Mutiny/Reactor, **read the Reactive sections of [java-core-analysis.md](./java-core-analysis.md) (§2 Spring WebFlux / Mutiny) before tracing control flow**. The request lifecycle, security filter chain, error handling, and threading model differ fundamentally from Spring MVC. Misreading a WebFlux app as MVC produces wrong sequence diagrams and wrong analysis.
 
 ## Symbol-Usage Tracing
 
 No LSP-backed "find all references" tool exists. Use `Grep` for precise symbol matches, optionally combined with the `Explore` subagent for broader sweeps. Read surrounding context to filter false positives.
 
-## Step 1: Load the Java Analysis Guide
+## Step 1: Load the Java Analysis Guides
 
-Read [java-analysis-guide.md](./java-analysis-guide.md) — the **Essential Analysis** section always, the **Extended Analysis** section only in Standard/Deep mode or when analyzing data layer, testing, or design patterns in depth.
+`Read` [java-core-analysis.md](./java-core-analysis.md) in **every** mode — it covers project identification, framework detection (incl. reactive), DI/Lombok, and control flow.
 
-The guide is split with a `=== END ESSENTIAL ANALYSIS ===` marker. Load by passing `offset` and `limit` to `Read`, or read the whole file when needed.
+In **Standard/Deep** mode, or whenever you analyze the data layer, design patterns, testing, or security in depth, also `Read` [java-deep-analysis.md](./java-deep-analysis.md). Each is a single whole-file read — no offset math.
 
 If the project includes JavaScript or Node.js modules (e.g., a frontend in a monorepo), note their presence in the ledger but do not deep-dive — recommend a separate analysis for non-Java modules.
 
 ## Step 2: Deep Analysis
 
-Apply the framework detection tables and checklists from `java-analysis-guide.md` systematically. Present findings incrementally — after each major module or section, share findings and ask: "Does this match your understanding?"
+Apply the framework detection tables and checklists from the Java analysis guides systematically. Present findings incrementally — after each major module or section, share findings and ask: "Does this match your understanding?"
 
 ### 2.1 Architecture and Structure — P0
 

@@ -1,6 +1,6 @@
 ---
 name: onboard-java
-description: "**Produce a written onboarding report** for a Java codebase by systematically mining the project. USE FOR: 'onboard me to this codebase', 'create an onboarding guide', 'ramp up on this Java project', 'generate an onboarding document', 'write an onboarding report', 'I need an onboarding artifact for the team'. The output is a markdown document (or set of documents in Standard/Deep mode), saved to disk, covering build setup, architecture, testing, APIs, data, security, observability, CI/CD, and code quality. Multi-phase workflow with a persistent findings ledger; resumable across sessions. NOT FOR conversational Q&A about a codebase — for that, use the separate `ask-java-codebase` plugin."
+description: "Produces a written onboarding report for a Java codebase by systematically mining the project. USE FOR: 'onboard me to this codebase', 'create an onboarding guide', 'ramp up on this Java project', 'generate an onboarding document', 'write an onboarding report', 'I need an onboarding artifact for the team'. The output is a markdown document (or set of documents in Standard/Deep mode), saved to disk, covering build setup, architecture, testing, APIs, data, security, observability, CI/CD, and code quality. Multi-phase workflow with a persistent findings ledger; resumable across sessions. NOT FOR conversational Q&A about a codebase — for that, use the separate `ask-java-codebase` plugin."
 argument-hint: "Provide the path to the Java project, or say 'onboard me to this codebase'"
 ---
 
@@ -9,6 +9,10 @@ argument-hint: "Provide the path to the Java project, or say 'onboard me to this
 You are a codebase onboarding specialist for Java projects. Your job is to systematically explore a Java codebase and produce a comprehensive onboarding guide for a new developer — extracting everything that can be learned from the code itself.
 
 This skill is the **single entry point** for the onboarding workflow. The phase-by-phase walkthrough lives in [references/workflow-phases.md](./references/workflow-phases.md). Each Phase 3 area has its own reference file under `references/area-*.md`. These reference files are **internal building blocks** of this skill — they are not user-invokable and not independently discoverable.
+
+## Operating Mode
+
+This skill **reads** the codebase and **writes only onboarding artifacts** — the onboarding report(s) and the findings ledger — into the chosen output directory. It does **not** modify source files, run builds or tests, or execute project commands unless the user explicitly asks. Documented build/run/test commands are *extracted from the code, not executed*; verification is opt-in and re-confirmed per command (see `references/area-build-local-dev.md` § Verify). Every claim in the report must be backed by code evidence — never fabricate.
 
 ## Workflow Summary
 
@@ -171,7 +175,7 @@ Use the `Explore` subagent (via the `Agent` tool with `subagent_type: "Explore"`
 [EXCLUDE]:     [Always exclude generated sources. See "Generated-code excludes" below]
 [RETURN FORMAT]: [Table with specific columns / List / Count]
 [LIMIT]:       [Max N results]
-[THOROUGHNESS]: [quick / medium / very thorough]
+[THOROUGHNESS]: [medium / very thorough]   <!-- the Explore agent accepts only these two values -->
 ```
 
 **Generated-code excludes** (apply to every subagent prompt and every `grep` / `find` you run yourself):
@@ -196,11 +200,13 @@ Record any **project-specific** generated paths discovered in Phase 1 (e.g., a c
 
 | Search Goal | Prompt |
 |---|---|
-| Find all REST controllers | "Find all classes annotated with @RestController or @Controller. SCOPE: **/src/main/java. EXCLUDE: [generated-code excludes]. Return a markdown table: module \| file path \| class name \| base @RequestMapping path. Limit 30 results. Quick." |
-| Map test structure | "Map the directory structure under **/src/test/java. EXCLUDE: [generated-code excludes]. Return: directory tree with count of test files per directory. Quick." |
+| Find all REST controllers | "Find all classes annotated with @RestController or @Controller. SCOPE: **/src/main/java. EXCLUDE: [generated-code excludes]. Return a markdown table: module \| file path \| class name \| base @RequestMapping path. Limit 30 results. Medium." |
+| Map test structure | "Map the directory structure under **/src/test/java. EXCLUDE: [generated-code excludes]. Return: directory tree with count of test files per directory. Medium." |
 | Find all Kafka usage | "Find all @KafkaListener annotations and KafkaTemplate usages. SCOPE: **/src/main/java. EXCLUDE: [generated-code excludes]. Return a table: file path \| type (consumer/producer) \| topic name. Limit 20. Medium." |
 | Find security annotations | "Find all @PreAuthorize, @Secured, and @RolesAllowed annotations. SCOPE: **/src/main/java. EXCLUDE: [generated-code excludes]. Return: file path \| method name \| annotation value. Limit 30. Medium." |
-| Find config properties | "Find all @ConfigurationProperties classes. SCOPE: **/src/main/java. EXCLUDE: [generated-code excludes]. Return: class name \| prefix \| file path. Limit 15. Quick." |
+| Find config properties | "Find all @ConfigurationProperties classes. SCOPE: **/src/main/java. EXCLUDE: [generated-code excludes]. Return: class name \| prefix \| file path. Limit 15. Medium." |
+
+**Treat subagent output as leads, not ground truth**: the `Explore` agent reads excerpts and reports `file:line` references that may be approximate or include false positives. Before citing any `file:line` as evidence in the report, re-`Read` that spot yourself and confirm it says what the summary claimed.
 
 **When NOT to use the subagent**: For reading a single known file, checking a specific config value, or when you need to make edits. Use direct `Read` / `Bash grep` / `Edit` calls instead.
 
@@ -284,7 +290,8 @@ Internal references — `Read` them on demand, never load all at once.
 | [references/area-observability.md](./references/area-observability.md) | Entering Phase 3.4 |
 | [references/area-cicd-deployment.md](./references/area-cicd-deployment.md) | Entering Phase 3.5 |
 | [references/area-code-quality.md](./references/area-code-quality.md) | Entering Phase 3.6 |
-| [references/java-analysis-guide.md](./references/java-analysis-guide.md) | Whenever `area-explain-code` (or any area doing Java-specific code reading) needs framework detection tables, Lombok-aware reading, reactive-stack handling, or design-pattern checklists. Essential Analysis section always; Extended Analysis on demand. |
+| [references/java-core-analysis.md](./references/java-core-analysis.md) | Always, whenever `area-explain-code` reads Java code: project identification, framework detection (incl. reactive), DI/Lombok-aware reading, control flow. Single whole-file read. |
+| [references/java-deep-analysis.md](./references/java-deep-analysis.md) | Standard/Deep mode, or when analyzing data layer, design patterns, modern Java, testing, security, or anti-patterns in depth. Single whole-file read. |
 | [assets/onboarding-report-template.md](./assets/onboarding-report-template.md) | Phase 1 (skeleton) and Phase 5 (finalize). |
 | [assets/build-local-dev-template.md](./assets/build-local-dev-template.md) | Phase 3.1 (Standard/Deep standalone report). |
 | [assets/code-explanation-template.md](./assets/code-explanation-template.md) | Phase 3.2 (Standard/Deep standalone report). |

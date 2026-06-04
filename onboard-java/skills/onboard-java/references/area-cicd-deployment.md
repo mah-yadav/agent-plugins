@@ -4,23 +4,34 @@ Reference for Phase 3.5 of the onboarding workflow. Produces a structured report
 
 **Core principle**: Trace the path to production. Map the entire delivery pipeline so the developer knows what happens when they push code, what gates their PR, and how deployments work.
 
+## Contents
+
+- Step 1: Identify the CI/CD & Deployment Stack
+- Step 2: Analyze CI Pipeline (2.1 structure, 2.2 build, 2.3 test, 2.4 quality gates, 2.5 secrets)
+- Step 3: Analyze Containerization (3.1 Dockerfile, 3.2 alternatives, 3.3 registry)
+- Step 4: Analyze Deployment (4.1 K8s, 4.2 Helm, 4.3 Kustomize, 4.4 cloud/VM, 4.5 IaC)
+- Step 5: Analyze Release Process
+- Step 6: Analyze Environment Management
+- Step 7: Generate CI/CD Report
+- Ledger update, exploration guidelines
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
 |---|---|---|
 | Step 1: Identify CI/CD stack | **P0** | Must know where the pipeline is |
-| Step 3.1: Pipeline structure | **P0** | Must understand the flow |
-| Step 3.4: Quality gates | **P0** | Must know what blocks a PR |
-| Step 4.1: Dockerfile analysis | **P1** | Important for understanding the container |
-| Step 5.1: K8s deployment | **P1** | Important for understanding where code runs |
-| Step 3.2–3.3: Build & test stage detail | **P1** | Useful context |
-| Step 5.2–5.5: Helm, Kustomize, IaC | **P1** | Important for DevOps-focused developers |
-| Step 6: Release process | **P1** | How versions are cut |
-| Step 7: Environment management | **P1** | Environment differences |
-| Step 3.5: Secrets in pipeline | **P2** | DevOps detail |
-| Step 4.2–4.3: Alternative containerization, registries | **P2** | Detail |
+| Step 2.1: Pipeline structure | **P0** | Must understand the flow |
+| Step 2.4: Quality gates | **P0** | Must know what blocks a PR |
+| Step 3.1: Dockerfile analysis | **P1** | Important for understanding the container |
+| Step 4.1: K8s deployment | **P1** | Important for understanding where code runs |
+| Step 2.2–2.3: Build & test stage detail | **P1** | Useful context |
+| Step 4.2–4.5: Helm, Kustomize, cloud/VM, IaC | **P1** | Important for DevOps-focused developers |
+| Step 5: Release process | **P1** | How versions are cut |
+| Step 6: Environment management | **P1** | Environment differences |
+| Step 2.5: Secrets in pipeline | **P2** | DevOps detail |
+| Step 3.2–3.3: Alternative containerization, registries | **P2** | Detail |
 
-**Quick mode**: Complete Steps 1, 3.1 (pipeline structure), 3.4 (quality gates / what blocks a PR). Skip everything else.
+**Quick mode**: Complete Step 1, Step 2.1 (pipeline structure), Step 2.4 (quality gates / what blocks a PR). Skip everything else.
 
 ## Ledger Read-Before
 
@@ -148,9 +159,9 @@ Environment list, config per environment, promotion flow, environment URLs, acce
 
 Write the report using the [CI/CD template](../assets/cicd-deployment-template.md).
 
-**Quick mode**: Fill sections 1 (Delivery Stack), 2.1–2.3 (Pipeline Overview — flow, triggers, stages), 2.4 (Quality Gates). Mark other sections `[Not analyzed — out of scope for Quick mode]`.
+**Quick mode**: Fill template sections 1 (Delivery Stack) and 2 (Pipeline Overview — flow, triggers, stages, and the quality gates that block a PR). Mark other sections `[Not analyzed — out of scope for Quick mode]`.
 
-Default location: `<output-dir>/cicd-deployment-report.md` (Standard/Deep only).
+Default location: `<output-dir>/cicd-deployment-report.md` (Deep mode only — in Standard mode, CI/CD findings roll into the main report).
 
 ## Ledger Update After
 
