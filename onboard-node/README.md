@@ -98,12 +98,16 @@ onboard-node/
     ├── references/
     │   ├── workflow-phases.md         ← Phase 1–5 walkthrough
     │   ├── area-build-local-dev.md    ← Phase 3.1 detail
-    │   ├── area-explain-code.md       ← Phase 3.2 detail
+    │   ├── area-explain-code.md       ← Phase 3.2 detail (routes to node-*.md below)
     │   ├── area-security.md           ← Phase 3.3 detail
     │   ├── area-observability.md      ← Phase 3.4 detail
     │   ├── area-cicd-deployment.md    ← Phase 3.5 detail
     │   ├── area-code-quality.md       ← Phase 3.6 detail
-    │   └── node-analysis-guide.md     ← Node framework + decorator + ESM/CJS guide
+    │   ├── node-frameworks.md         ← framework detection, source layout, request lifecycles
+    │   ├── node-type-system.md        ← TS strictness, DI, decorators, ESM/CJS
+    │   ├── node-data-layer.md         ← ORMs, migrations, validation, caching
+    │   ├── node-testing.md            ← test runners, coverage, mocking
+    │   └── node-patterns.md           ← design patterns, modern features, anti-patterns
     └── assets/
         ├── onboarding-report-template.md
         └── (six standalone report templates)

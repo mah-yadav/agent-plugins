@@ -4,6 +4,13 @@ Reference for Phase 3.3. Produces a structured security report covering authenti
 
 **Core principle**: Understand the security model before you write code. Node apps are particularly prone to misconfigurations because security is *composed* (middleware order, manual checks) rather than declared.
 
+## Contents
+
+- **Priority tiers** · **Ledger read-before** · **Symbol tracing**
+- **Step 1** Identify the security stack · **Step 2** Authentication · **Step 3** Authorization
+- **Step 4** Security infrastructure (CORS, headers, rate limiting, sessions, CSRF, secrets, custom middleware) · **Step 5** Security testing · **Step 6** Local dev auth
+- **Step 7** Generate report · **Ledger update after** · **Anti-patterns checklist** · **Exploration guidelines**
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
@@ -235,7 +242,7 @@ Catalog any custom middleware that touches auth/authz/rate-limiting/header-setti
 
 Write using the [security analysis template](../assets/security-analysis-template.md).
 
-**Quick mode**: Fill sections 1 (Security Stack), 2.1 (Auth Mechanism), 5.1 (Secrets — how they're managed), 7 (Local Dev Auth). Mark others `[Not analyzed]`.
+**Quick mode**: Fill the *Security Stack*, *Authentication → Mechanism*, *Security Infrastructure → Secrets management*, and *Local Development Authentication* sections. Mark others `[Not analyzed]`.
 
 Default location: `<output-dir>/security-analysis-report.md` (Standard/Deep only).
 

@@ -4,6 +4,16 @@ The phase-by-phase walkthrough for the Node onboarding workflow. Loaded by `SKIL
 
 The output is a practical onboarding report — not a code explanation, but a **developer operations guide**: how to install, build, test, deploy, and work with the project day-to-day.
 
+## Contents
+
+- **Tools**
+- **Phase 1: Identify & Orient**
+- **Phase 2: Scope & Prioritize**
+- **Phase 3: Systematic Codebase Mining** — the canonical area-priority-by-mode table lives here
+- **Phase 4: Compile "Still Need to Ask" List**
+- **Phase 5: Finalize Onboarding Report**
+- **Exploration & conversational guidelines**
+
 ## Core Principle
 
 **Mine the codebase first, ask people later.** Extract the 60–70% of onboarding knowledge that lives in the code, config files, and project structure.
@@ -85,7 +95,7 @@ Establish the project landscape quickly.
 
 8. **Detect decorator usage**:
    - Grep for `^@[A-Z]\w+` in source. If matches in NestJS / TypeORM / class-validator / type-graphql patterns, mark `Decorator usage = Yes` in the ledger.
-   - If yes, all subsequent reading must use the decorator-aware rules in `node-analysis-guide.md` § 3.
+   - If yes, all subsequent reading must use the decorator-aware rules in `node-type-system.md` § Decorator-aware reading.
 
 9. **Detect path aliases** in `tsconfig.json` `compilerOptions.paths`. Record them in the ledger — they determine how to resolve imports later.
 
@@ -160,7 +170,7 @@ Establish the project landscape quickly.
 
 **Create the findings ledger**: Use `Write` to create `<output-dir>/.onboarding-findings-ledger.md` with the structure defined in `SKILL.md`. Populate Project Identity (all fields including `Decorator usage`, `Edge runtime target`, `Module system`, `Language`, `TS strictness`), Workspace/Monorepo Layout, Generated-code & Build Output Paths, Path Aliases, Files Read, and Frameworks Detected.
 
-**Create the report skeleton**: Use the [onboarding report template](../assets/onboarding-report-template.md). Fill Section 1 (Project Identity) and Section 2 (Tech Stack). Use the placeholder `[TODO — pending Phase 2 mode selection]` for every other section.
+**Create the report skeleton**: Use the [onboarding report template](../assets/onboarding-report-template.md). Fill the *Project Identity* and *Tech Stack* sections. Use the placeholder `[TODO — pending Phase 2 mode selection]` for every other section.
 
 **Resume-instructions block**: At the very top of the report skeleton, insert:
 
@@ -232,9 +242,7 @@ A "Summary only" Quick row produces a section that's exactly the per-area "Minim
 
 **Goal**: Can the developer install, build, and run the project from scratch?
 
-**Load**: `Read` [references/area-build-local-dev.md](./area-build-local-dev.md).
-
-**Minimum viable output (Quick mode)**: Install command, build command, run command, test command, key env variables, local services list.
+**Load**: `Read` [references/area-build-local-dev.md](./area-build-local-dev.md). Quick-mode output scope is defined in that file.
 
 ---
 
@@ -242,11 +250,9 @@ A "Summary only" Quick row produces a section that's exactly the per-area "Minim
 
 **Goal**: How is the code structured, what APIs does it expose/consume, how does it manage data, and how does the team test?
 
-**Load**: `Read` [references/area-explain-code.md](./area-explain-code.md). It in turn refers to [references/node-analysis-guide.md](./node-analysis-guide.md) — Essential Analysis always; Extended Analysis in Standard/Deep mode.
+**Load**: `Read` [references/area-explain-code.md](./area-explain-code.md). It routes to the `node-*.md` reference files (`node-frameworks` always; `node-type-system` / `node-data-layer` / `node-testing` / `node-patterns` per topic — eagerly in Standard/Deep).
 
 **Boundary with other areas**: `area-explain-code` identifies but does NOT deeply analyze auth, observability, CI/CD, or quality tools — those belong to 3.3, 3.4, 3.5, 3.6.
-
-**Minimum viable output (Quick mode)**: Architectural pattern, package-to-layer mapping, top 5 entities/schemas, endpoint summary count, test command, test framework list.
 
 ---
 
@@ -258,17 +264,13 @@ A "Summary only" Quick row produces a section that's exactly the per-area "Minim
 
 **Prior findings check**: If `area-explain-code` already identified the auth middleware/library, start from that finding.
 
-**Minimum viable output (Quick mode)**: Authentication mechanism, how to authenticate locally, where secrets are configured.
-
 ---
 
 ### Area 3.4: Observability — P2 (P0 in Quick: log location + health endpoint only)
 
 **Goal**: How is the application monitored and debugged?
 
-**Load**: `Read` [references/area-observability.md](./area-observability.md).
-
-**Minimum viable output (Quick mode)**: Where logs appear locally, health check URL, how to change log level.
+**Load**: `Read` [references/area-observability.md](./area-observability.md). Quick-mode output scope is defined in that file.
 
 ---
 
@@ -276,9 +278,7 @@ A "Summary only" Quick row produces a section that's exactly the per-area "Minim
 
 **Goal**: How does code get from a PR to production?
 
-**Load**: `Read` [references/area-cicd-deployment.md](./area-cicd-deployment.md).
-
-**Minimum viable output (Quick mode)**: CI platform, pipeline stages, what gates a PR merge.
+**Load**: `Read` [references/area-cicd-deployment.md](./area-cicd-deployment.md). Quick-mode output scope is defined in that file.
 
 ---
 
@@ -286,9 +286,7 @@ A "Summary only" Quick row produces a section that's exactly the per-area "Minim
 
 **Goal**: What standards does the team enforce?
 
-**Load**: `Read` [references/area-code-quality.md](./area-code-quality.md).
-
-**Minimum viable output (Quick mode)**: What checks will fail a PR (table: check | tool | fix command), auto-format command.
+**Load**: `Read` [references/area-code-quality.md](./area-code-quality.md). Quick-mode output scope is defined in that file.
 
 ---
 

@@ -4,6 +4,14 @@ Reference for Phase 3.1. Produces a practical local development guide for a Node
 
 **Goal**: From a fresh clone to a running application with passing tests, without asking anyone for help.
 
+## Contents
+
+- **Priority tiers** · **Ledger read-before**
+- **Step 1** Install & build · **Step 2** Package manager & lockfile · **Step 3** Node version & engines
+- **Step 4** Environment config · **Step 5** Local services · **Step 6** Docker & containers
+- **Step 7** IDE tooling · **Step 8** Scripts & automation · **Step 9** Verify (off by default) · **Step 10** Generate guide
+- **Ledger update after** · **Exploration guidelines**
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |

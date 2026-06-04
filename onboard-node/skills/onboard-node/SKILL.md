@@ -180,8 +180,10 @@ Use the `Explore` subagent (via the `Agent` tool with `subagent_type: "Explore"`
 [EXCLUDE]:     [Always exclude node_modules and build output. See below]
 [RETURN FORMAT]: [Table with specific columns / List / Count]
 [LIMIT]:       [Max N results]
-[THOROUGHNESS]: [quick / medium / very thorough]
+[THOROUGHNESS]: [medium / very thorough]   ← the Explore agent's only valid breadth values
 ```
+
+**Subagent results are leads, not ground truth.** The Explore agent reads excerpts and reports `file:line` references. Before citing any such location as evidence in the report, **re-`Read` it yourself** to confirm.
 
 **Standard excludes** (apply to every subagent prompt and every `grep` / `find` you run yourself):
 
@@ -208,10 +210,10 @@ Record **project-specific** generated paths discovered in Phase 1 (Prisma client
 | Search Goal | Prompt |
 |---|---|
 | Find all Express route definitions | "Find all calls to `app.get/post/put/patch/delete` or `router.get/post/...` in **/src/**. EXCLUDE: [standard excludes]. Return a markdown table: package \| file path \| method \| path \| handler name. Limit 50. Medium." |
-| Find NestJS controllers | "Find all classes annotated with @Controller in **/src/**. EXCLUDE: [standard excludes]. Return: package \| file path \| class name \| base route path \| HTTP methods declared. Limit 30. Quick." |
+| Find NestJS controllers | "Find all classes annotated with @Controller in **/src/**. EXCLUDE: [standard excludes]. Return: package \| file path \| class name \| base route path \| HTTP methods declared. Limit 30. Medium." |
 | Find Zod schemas | "Find all `z.object(...)` declarations exported from files in **/src/**. EXCLUDE: [standard excludes]. Return: file path \| export name \| top-level field names. Limit 30. Medium." |
 | Find Prisma model usages | "Find all calls to `prisma.<model>.<method>(...)` in **/src/**. EXCLUDE: [standard excludes]. Return: file path \| model \| method \| line number. Limit 50. Medium." |
-| Find env var reads | "Find all `process.env.<VAR>` references in **/src/**. EXCLUDE: [standard excludes]. Return: variable name \| count of usages \| representative file path. Limit 30. Quick." |
+| Find env var reads | "Find all `process.env.<VAR>` references in **/src/**. EXCLUDE: [standard excludes]. Return: variable name \| count of usages \| representative file path. Limit 30. Medium." |
 
 **Note on symbol-reference tracing**: TypeScript projects can use the TypeScript Language Server's references via tools that wrap it, but Claude Code doesn't natively expose one. Use `grep` for precise symbol matches, paired with file reading when false positives matter. Path aliases (from tsconfig `paths`) mean `import { x } from '@/foo'` won't be findable by grep on the literal path — also search for the import-alias form.
 
@@ -293,6 +295,10 @@ Internal references — `Read` them on demand, never load all at once.
 | [references/area-observability.md](./references/area-observability.md) | Entering Phase 3.4 |
 | [references/area-cicd-deployment.md](./references/area-cicd-deployment.md) | Entering Phase 3.5 |
 | [references/area-code-quality.md](./references/area-code-quality.md) | Entering Phase 3.6 |
-| [references/node-analysis-guide.md](./references/node-analysis-guide.md) | Whenever `area-explain-code` (or any area doing Node-specific code reading) needs framework detection tables, decorator-aware reading (NestJS, TypeORM, class-validator), ESM/CJS handling, async patterns, or anti-pattern checklists. Essential Analysis section always; Extended Analysis on demand. |
+| [references/node-frameworks.md](./references/node-frameworks.md) | Framework detection, source layout, request lifecycles, async/error handling. Loaded by `area-explain-code` (always — architecture is P0). |
+| [references/node-type-system.md](./references/node-type-system.md) | TypeScript strictness/idioms, DI, decorator-aware reading, ESM/CJS. Load when reading TS or decorator-heavy code. |
+| [references/node-data-layer.md](./references/node-data-layer.md) | ORMs, migrations, validation, caching, connection pooling. Load for Phase 3.2 data-flow analysis. |
+| [references/node-testing.md](./references/node-testing.md) | Test runners, commands, coverage, mocking. Load for Phase 3.2 testing analysis. |
+| [references/node-patterns.md](./references/node-patterns.md) | Design patterns, modern Node/TS features, code-level anti-patterns. Load for design-idiom / tech-debt notes. |
 | [assets/onboarding-report-template.md](./assets/onboarding-report-template.md) | Phase 1 (skeleton) and Phase 5 (finalize). |
 | [assets/*-template.md](./assets/) | Phase 3 area-specific standalone reports (Standard/Deep mode only). |

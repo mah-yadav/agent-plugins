@@ -4,6 +4,13 @@ Reference for Phase 3.4. Produces a structured report covering logging, metrics,
 
 **Core principle**: If you can't observe it, you can't debug it. Node observability is library-driven (not framework-driven like Spring Actuator), so the libraries chosen and their configuration determine the entire surface.
 
+## Contents
+
+- **Priority tiers** · **Ledger read-before** · **Symbol tracing**
+- **Step 1** Identify the observability stack · **Step 2** Logging · **Step 3** Metrics · **Step 4** Health checks
+- **Step 5** Distributed tracing · **Step 6** Error tracking & APM · **Step 7** Debugging cheat sheet · **Step 8** Generate report
+- **Ledger update after** · **Exploration guidelines**
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
@@ -222,7 +229,7 @@ A practical table for the report:
 
 Write using the [observability template](../assets/observability-analysis-template.md).
 
-**Quick mode**: Fill sections 1 (Stack), 2.1 (Logging config), 4.1 (Health endpoint), 7 (Debugging cheat sheet). Mark others `[Not analyzed]`.
+**Quick mode**: Fill the *Observability Stack*, *Logging → Configuration*, *Health Checks → Endpoints*, and *Debugging Cheat Sheet* sections. Mark others `[Not analyzed]`.
 
 Default location: `<output-dir>/observability-analysis-report.md` (Standard/Deep only).
 

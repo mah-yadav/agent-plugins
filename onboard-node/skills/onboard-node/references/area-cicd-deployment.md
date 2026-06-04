@@ -4,6 +4,13 @@ Reference for Phase 3.5. Produces a structured report covering pipeline stages, 
 
 **Core principle**: Trace the path to production. Map the entire delivery pipeline so the developer knows what happens when they push code, what gates their PR, and how deployments work.
 
+## Contents
+
+- **Priority tiers** · **Ledger read-before**
+- **Step 1** Identify the CI/CD & deployment stack · **Step 2** Analyze CI pipeline (structure, build, test, quality gates, secrets)
+- **Step 3** Containerization · **Step 4** Deployment (k8s, Helm, serverless, edge, IaC) · **Step 5** Release process · **Step 6** Environment management
+- **Step 7** Generate report · **Ledger update after** · **Exploration guidelines**
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
@@ -232,7 +239,7 @@ If `Edge runtime target = Yes` in the ledger:
 
 Write using the [CI/CD template](../assets/cicd-deployment-template.md).
 
-**Quick mode**: Fill sections 1 (Stack), 2.1–2.3 (Pipeline Overview), 2.4 (Quality Gates). Mark others `[Not analyzed]`.
+**Quick mode**: Fill the *Delivery Stack*, *CI Pipeline* (Trigger events, Stages, Caching), and *Quality Gates — What Blocks a PR* sections. Mark others `[Not analyzed]`.
 
 Default location: `<output-dir>/cicd-deployment-report.md` (Standard/Deep only).
 

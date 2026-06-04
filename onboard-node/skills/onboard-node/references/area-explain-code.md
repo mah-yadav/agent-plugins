@@ -2,7 +2,27 @@
 
 Reference for Phase 3.2. Produces a structured code explanation covering architecture, control flow, data flow, design patterns, and testing.
 
-Always pair this reference with [node-analysis-guide.md](./node-analysis-guide.md).
+## Contents
+
+- **Priority tiers** · **Boundaries** (identify-don't-deep-dive)
+- **Node reference routing** — which `node-*.md` file to load per topic
+- **Ledger read-before** · **Decorator-aware / ESM / edge / symbol-tracing notes**
+- **Step 2: Deep analysis** — 2.1 Architecture · 2.2 Dependencies · 2.3 Data · 2.4 Control flow · 2.5 Patterns · 2.6 Testing
+- **Step 3: Synthesize and document**
+
+## Node reference routing
+
+This area draws on the `node-*.md` reference files. Load **only** the file the current topic needs — each is a clean whole-file `Read`:
+
+| When analyzing… | `Read` |
+|---|---|
+| Framework, source layout, request lifecycle, async, error handling | `node-frameworks.md` |
+| TypeScript strictness/idioms, DI, decorators, ESM/CJS | `node-type-system.md` |
+| Data models, ORMs, migrations, validation, caching, pooling | `node-data-layer.md` |
+| Design patterns, modern features, code-level anti-patterns | `node-patterns.md` |
+| Test runners, commands, coverage, mocking | `node-testing.md` |
+
+**Always** load `node-frameworks.md` (architecture + control flow are P0). Load the others when their topic comes up, or eagerly in Standard/Deep mode.
 
 ## Priority Tiers (within this area)
 
@@ -40,7 +60,7 @@ Embed Mermaid blocks for sequence diagrams; viewers (GitHub, VS Code, IntelliJ) 
 ## Decorator-Aware Reading
 
 If the ledger marks `Decorator usage = Yes`:
-- Read [node-analysis-guide.md](./node-analysis-guide.md) § 3 "Decorator-aware reading" before tracing any class.
+- Read [node-type-system.md](./node-type-system.md) § Decorator-aware reading before tracing any class.
 - NestJS routes are not visible as `app.get(...)` calls — they're declared via `@Controller`/`@Get`/`@Post` and wired by reflection.
 - TypeORM/MikroORM entity columns are declared via `@Column` — DB schema is implicit.
 - class-validator rules are declared via `@IsX` decorators on DTO classes.
@@ -71,9 +91,9 @@ Recommendations and code examples in the report must respect this.
 
 No native LSP-backed "find all references" — use `Grep` precisely, paired with file reading for context. **Path aliases** from tsconfig (`@/foo`, `~/bar`, `@app/x`) mean a search for the literal path won't find aliased imports. Always search for both the literal path and the aliased form.
 
-## Step 1: Load the Node Analysis Guide
+## Step 1: Load the Node References
 
-Read [node-analysis-guide.md](./node-analysis-guide.md) — **Essential Analysis** (Sections 1–4) always, **Extended Analysis** (Sections 5–10) only in Standard/Deep or when analyzing data layer, design patterns, or testing in depth.
+Load `node-frameworks.md` now (framework + source layout + control flow are needed for everything below). Load the other `node-*.md` files per the routing table above as each topic comes up — or all of them eagerly in Standard/Deep mode.
 
 If the project includes substantial non-Node code (Python services, Go binaries called via child_process, Rust native modules), note their presence but don't deep-dive — recommend a separate analysis.
 
@@ -125,7 +145,7 @@ If the project includes substantial non-Node code (Python services, Go binaries 
 
 ### 2.4 Control Flow — P0
 
-- **Request lifecycle**: Trace end-to-end. Use the framework-specific lifecycle from [node-analysis-guide.md](./node-analysis-guide.md) § 4.
+- **Request lifecycle**: Trace end-to-end. Use the framework-specific lifecycle from [node-frameworks.md](./node-frameworks.md) § Request lifecycles.
 - **Routing**: How are routes registered?
   - Express/Fastify/Koa/Hono: explicit `app.METHOD(path, handler)` calls.
   - NestJS: `@Controller` + `@Get`/`@Post` decorators; routes implicit.
@@ -141,19 +161,19 @@ If the project includes substantial non-Node code (Python services, Go binaries 
 
 ### 2.5 Design Patterns and Idioms — P1
 
-- Patterns from [node-analysis-guide.md](./node-analysis-guide.md) § 6.
+- Patterns from [node-patterns.md](./node-patterns.md) § Design patterns.
 - Note language idioms:
   - JS/TS: discriminated unions, Result types, branded types, `satisfies`, `as const`.
   - Promise composition: `Promise.all` vs. `allSettled` vs. `any`.
   - Generator functions, async iterators.
   - Symbol-keyed properties.
-- Call out anti-patterns (see § 10).
+- Call out anti-patterns (see [node-patterns.md](./node-patterns.md) § Anti-patterns).
 
 **Minimum viable output**: Pattern table (pattern, where used, purpose).
 
 ### 2.6 Testing — P0
 
-- Test framework: Jest / Vitest / Mocha / node:test / AVA — see [node-analysis-guide.md](./node-analysis-guide.md) § 8 for detection.
+- Test framework: Jest / Vitest / Mocha / node:test / AVA — see [node-testing.md](./node-testing.md) for detection.
 - Test commands: from `package.json` scripts.
 - **Test types** present:
   - **Unit**: usually colocated (`foo.ts` + `foo.test.ts`) or in `__tests__/` or in `tests/`.
@@ -174,7 +194,7 @@ If the project includes substantial non-Node code (Python services, Go binaries 
 4. Include Mermaid diagrams for non-trivial flows.
 5. Write to `<output-dir>/code-explanation-report.md` (Standard/Deep mode only).
 
-**Quick mode document**: Sections 1–4 (Overview, Tech Stack, Project Structure, Architecture), 7 (Request Flow — one flow), 8 (Data Models — key entities), 13 (Testing — commands and frameworks). Mark others `[Not analyzed]`.
+**Quick mode document**: Fill the *Overview*, *Tech Stack*, *Project Structure*, *Architecture*, *Request Flow* (one representative), *Data Models* (key entities), and *Testing* (commands + frameworks) sections. Mark others `[Not analyzed]`.
 
 ## Ledger Update After
 

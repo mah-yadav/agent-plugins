@@ -4,6 +4,13 @@ Reference for Phase 3.6. Produces a structured report covering linting, formatti
 
 **Core principle**: Know what will reject your code before you write it. PR failures from unknown conventions are the #1 onboarding friction.
 
+## Contents
+
+- **Priority tiers** · **Ledger read-before** · **Symbol tracing**
+- **Step 1** Identify the quality stack · **Step 2** Linting rules · **Step 3** Formatting · **Step 4** Type discipline
+- **Step 5** Architecture tests · **Step 6** Dependency management · **Step 7** Git hooks & commit conventions · **Step 8** Generate report
+- **Ledger update after** · **Exploration guidelines**
+
 ## Priority Tiers (within this area)
 
 | Step | Priority | Rationale |
@@ -276,7 +283,7 @@ What hooks run:
 
 Write using the [code quality template](../assets/code-quality-template.md).
 
-**Quick mode**: Fill section 1 (Stack), section 3.1 (Formatter + commands), and the "What Will Fail My PR?" table. Mark others `[Not analyzed]`.
+**Quick mode**: Fill the *Quality Stack*, *Code Formatting → Formatter*, and *What Will Fail My PR?* sections. Mark others `[Not analyzed]`.
 
 Default location: `<output-dir>/code-quality-report.md` (Standard/Deep only).
 
