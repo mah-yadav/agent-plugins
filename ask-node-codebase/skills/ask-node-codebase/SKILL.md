@@ -58,24 +58,24 @@ Cache these mentally for follow-up questions in the same session.
 
 ### 3. Route to the right knowledge
 
-Match the question shape to one of these areas. Load [references/node-analysis-guide.md](./references/node-analysis-guide.md) sections accordingly. The guide is split with a `=== END ESSENTIAL ANALYSIS ===` marker; load only what you need.
+Match the question shape to a reference file and `Read` that whole file — each is scoped to one concern, so one clean read loads exactly what you need.
 
-| Question shape | What to load |
+| Question shape | File to read |
 |---|---|
-| Project identity, framework, layout, bootstrap | Sections 1–3 (Project Identification, Framework Detection, Type System & DI) |
-| Request lifecycle, middleware, routing, error handling, async | Section 4 (Control Flow Patterns) |
-| Data model, ORM (Prisma/Drizzle/TypeORM/Mongoose), validation (Zod/Yup/Joi) | Section 5 (Data Layer Analysis) |
-| Caching, connection pooling | Section 5 (Caching / Connection Pooling subsections) |
-| Auth, JWT, sessions, security middleware | Section 2 (framework detection) + Section 9 (Security Considerations); grep for auth library names |
-| Logging, metrics, tracing, health checks | Find logging config + observability deps; section 4 for error handling patterns |
-| Build, run, scripts, package manager | `package.json` `scripts` + lockfile detection |
-| Testing setup, Jest/Vitest/Mocha | Section 8 (Testing Analysis) |
-| Design patterns, idioms, modern Node/TS features | Section 6 (Design Patterns) + Section 7 (Modern Node/TS Features) |
-| Anti-patterns, smells | Section 10 (Common Anti-Patterns) + Section 9 |
-| Decorator-driven reading (NestJS / TypeORM) | Section 3 "Decorator-aware reading" |
-| ESM vs CJS issues | Section 3 "ESM vs CommonJS" |
+| Project identity, layout, package manager, TypeScript, DI, decorators, ESM/CJS | [references/foundation.md](./references/foundation.md) |
+| Which framework, where routes/controllers/middleware live, what a guard/decorator does | [references/web-frameworks.md](./references/web-frameworks.md) |
+| GraphQL resolvers, gRPC, WebSockets/real-time, Kafka/queues/jobs | [references/integrations.md](./references/integrations.md) |
+| Request lifecycle, middleware ordering, async patterns, error handling | [references/control-flow.md](./references/control-flow.md) |
+| Data model, ORM (Prisma/Drizzle/TypeORM/Mongoose), validation (Zod/Yup/Joi), caching, connection pooling | [references/data-layer.md](./references/data-layer.md) |
+| Testing setup, Jest/Vitest/Mocha, coverage, mocking | [references/testing.md](./references/testing.md) |
+| Design patterns, idioms, modern Node/TS features | [references/design-and-modern.md](./references/design-and-modern.md) |
+| Security setup (auth/JWT/CORS/helmet/CSRF), anti-patterns, smells | [references/security-and-antipatterns.md](./references/security-and-antipatterns.md) |
 
-If the question spans areas, load multiple sections. If unsure where to start, Sections 1–4 (Essential Analysis) are the foundation.
+Notes:
+- **Auth / security** questions usually need *both* `web-frameworks.md` (to locate the middleware/guard) and `security-and-antipatterns.md` (to read what to check). Grep for the auth library name too.
+- **Logging / metrics / tracing / health checks** aren't a dedicated file: grep for the observability deps and config, and use `control-flow.md` for error-handling paths.
+- **Build / run / scripts** come straight from `package.json` `scripts` + lockfile detection (`foundation.md`) — no extra file needed.
+- If the question spans concerns, read multiple files. When unsure where to start, `foundation.md` is the orientation layer.
 
 ### 4. Investigate
 
@@ -98,12 +98,14 @@ Right tool for the shape:
                [+ project-specific: Prisma generated client, openapi-generated, etc.]
 [RETURN FORMAT]: [Table with specific columns / numbered list / count]
 [LIMIT]:       [N — usually 10-30]
-[THOROUGHNESS]: quick | medium | very thorough
+[THOROUGHNESS]: medium | very thorough
 ```
+
+(The `Explore` subagent only accepts `medium` or `very thorough` — there is no `quick`.) Subagent results are *leads*: re-`Read` the cited `file:line` before presenting it as evidence.
 
 ### Node-specific traps (always apply)
 
-1. **Decorator usage** (NestJS / TypeORM / class-validator / type-graphql / tsyringe / routing-controllers): Source-only reading is incomplete. Behavior is generated from metadata at runtime via reflection. Read the relevant section of `node-analysis-guide.md` before drawing conclusions about routing, DI, or schema.
+1. **Decorator usage** (NestJS / TypeORM / class-validator / type-graphql / tsyringe / routing-controllers): Source-only reading is incomplete. Behavior is generated from metadata at runtime via reflection. Read `references/foundation.md` (Decorator-aware reading) before drawing conclusions about routing, DI, or schema.
 
 2. **ESM vs CJS**: `import` vs. `require`, `__dirname` vs. `import.meta.url`, conditional `exports` in package.json — get this wrong and you'll misread the module graph. Check `"type"` in package.json first.
 
@@ -164,8 +166,6 @@ If conversation grows long and you notice you're losing track, summarize prior f
 - Not a code reviewer → use a review skill.
 - Not a security audit → use a security-review skill; this skill answers *"how is security set up here?"*, not *"is it good?"*.
 
-## Reference Map
+## Reference files
 
-| File | When to read |
-|---|---|
-| [references/node-analysis-guide.md](./references/node-analysis-guide.md) | Step 3 of every investigation. Load only the sections matching the question shape — Essential Analysis (1–4) for framework / control flow / DI / type-system questions; Extended Analysis (5–10) for data, design patterns, modern features, testing, security, anti-patterns. Contains the Decorator-aware reading (Section 3), ESM vs CJS handling (Section 3), and edge-runtime caveats critical for many real Node codebases. |
+The routing table in **Step 3** is the single catalog of reference files — match the question shape there and `Read` the matching file. Each file is scoped to one concern (`foundation`, `web-frameworks`, `integrations`, `control-flow`, `data-layer`, `testing`, `design-and-modern`, `security-and-antipatterns`), so one whole-file read loads exactly what the question needs and nothing else. `foundation.md` carries the Node-specific traps (decorator-aware reading, ESM/CJS, edge-runtime caveats) and is the orientation layer for most questions.

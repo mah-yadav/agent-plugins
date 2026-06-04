@@ -89,12 +89,19 @@ Most real sessions have 2–6 follow-up questions building on the same investiga
 ask-node-codebase/
 ├── .claude-plugin/plugin.json
 └── skills/ask-node-codebase/
-    ├── SKILL.md                       ← Q&A workflow + Node traps + routing
+    ├── SKILL.md                          ← Q&A workflow + Node traps + routing
     └── references/
-        └── node-analysis-guide.md     ← Node framework + decorator + ESM/CJS guide
+        ├── foundation.md                 ← project ID, types, DI, decorators, ESM/CJS
+        ├── web-frameworks.md             ← Express/Fastify/NestJS/Koa/Hono/tRPC/Next
+        ├── integrations.md               ← GraphQL, gRPC, WebSockets, queues
+        ├── control-flow.md               ← request lifecycles, async, error handling
+        ├── data-layer.md                 ← ORMs, validation, caching, pooling
+        ├── testing.md                    ← runners, coverage, mocking
+        ├── design-and-modern.md          ← design patterns + modern Node/TS features
+        └── security-and-antipatterns.md  ← security setup + smells
 ```
 
-The plugin loads sections of `node-analysis-guide.md` on demand based on the question shape (framework detection / control flow / data layer / security / testing / design patterns / anti-patterns / decorator-aware reading / ESM-CJS). It does not pre-load the whole guide.
+Each reference file is scoped to one concern. Based on the question shape, the skill reads only the matching file(s) — a single whole-file `Read` with no over-reading. It never pre-loads everything.
 
 ## Scope and limits
 
@@ -114,7 +121,7 @@ The plugin loads sections of `node-analysis-guide.md` on demand based on the que
 
 ## Version
 
-v1.0.0 — initial release. Shares `node-analysis-guide.md` (verbatim) with the sibling `onboard-node` plugin. Parallel to the `ask-java-codebase` plugin.
+v1.1.0 — split the single `node-analysis-guide.md` into per-concern reference files (`foundation`, `web-frameworks`, `integrations`, `control-flow`, `data-layer`, `testing`, `design-and-modern`, `security-and-antipatterns`) so each question loads only what it needs; removed leftover Quick/Standard/Deep "mode" language and the section-offset loading marker. This plugin's analysis guide is now its own, intentionally diverged from `onboard-node` — keep changes scoped to this plugin.
 
 ## Author
 
