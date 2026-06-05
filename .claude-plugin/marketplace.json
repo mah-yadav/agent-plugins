@@ -4,7 +4,7 @@
     "name": "Mahesh Yadav"
   },
   "metadata": {
-    "description": "Claude Code plugins for onboarding onto and asking questions about Java and Node.js codebases.",
+    "description": "Claude Code plugins for onboarding onto and asking questions about Java and Node.js codebases, and for modernizing a codebase by replacing a library, framework, or component.",
     "version": "1.0.0"
   },
   "plugins": [
@@ -27,6 +27,11 @@
       "name": "onboard-node",
       "source": "./onboard-node",
       "description": "Onboard a developer onto a Node.js codebase via a phased workflow that mines build, architecture, security, observability, CI/CD, and code quality, then produces a written report."
+    },
+    {
+      "name": "modernize",
+      "source": "./modernize",
+      "description": "Replaces a library, framework, or component with a new one via a 3-stage, document-driven pipeline: analyze usage (Usage Report) -> plan the replacement with an API mapping and behavior-change table (Replacement Plan) -> execute, sweep for leftover references, and verify (Replacement Report)."
     }
   ]
 }

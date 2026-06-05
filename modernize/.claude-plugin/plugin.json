@@ -1,0 +1,21 @@
+{
+  "name": "modernize",
+  "version": "1.0.0",
+  "description": "Replaces a library, framework, or component with a new one across a codebase via a 3-stage, document-driven pipeline. Single skill (`modernize`) that orchestrates: Stage 1 analyzes how the old component is used (code, build tooling, dynamic/string references, framework integrations) and writes a Usage Report; Stage 2 runs pre-flight compatibility checks and writes a Replacement Plan with an API mapping table and behavior-change column; Stage 3 executes the edits, sweeps for leftover references, verifies the build/tests, and writes a Replacement Report. Stage workflows live in internal reference files; no user-invokable sub-skills.",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "modernize",
+    "migration",
+    "migrate",
+    "replace",
+    "upgrade",
+    "refactor",
+    "dependency",
+    "library",
+    "framework",
+    "swap",
+    "codebase-analysis"
+  ]
+}
