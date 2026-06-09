@@ -1,0 +1,30 @@
+{
+  "name": "node-app-advisor",
+  "version": "1.0.0",
+  "description": "Critically analyzes a Node.js application to find architectural, design, security, performance, and technical-debt issues, then writes two report files. Single skill (`node-app-advisor`) that runs a phased workflow — Phase 1 orient, Phase 2 scope, Phase 3 analyze five areas (architecture & design, security & dependencies, performance & configuration, testing & API, technical debt), Phase 4 Findings Report, Phase 5 Remediation Backlog with exact before/after code changes. Each area's detection playbook lives in an internal reference file; no user-invocable sub-skills. Supports Express, Fastify, NestJS, Koa, Hono, Next.js (API routes), and tRPC, in JavaScript or TypeScript (web, API, worker, CLI).",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "typescript",
+    "code-review",
+    "architecture",
+    "security",
+    "owasp",
+    "performance",
+    "technical-debt",
+    "code-quality",
+    "audit",
+    "express",
+    "fastify",
+    "nestjs",
+    "koa",
+    "hono",
+    "nextjs",
+    "trpc",
+    "graphql",
+    "codebase-analysis"
+  ]
+}

@@ -32,6 +32,16 @@
       "name": "modernize",
       "source": "./modernize",
       "description": "Replaces a library, framework, or component with a new one via a 3-stage, document-driven pipeline: analyze usage (Usage Report) -> plan the replacement with an API mapping and behavior-change table (Replacement Plan) -> execute, sweep for leftover references, and verify (Replacement Report)."
+    },
+    {
+      "name": "java-app-advisor",
+      "source": "./java-app-advisor",
+      "description": "Critically analyzes a Java application (Spring Boot, Micronaut, Quarkus, plain Java) for architectural, design, security, performance, and technical-debt issues via a phased, evidence-first workflow, then writes a prioritized Findings Report and a Remediation Backlog with exact before/after code changes."
+    },
+    {
+      "name": "node-app-advisor",
+      "source": "./node-app-advisor",
+      "description": "Critically analyzes a Node.js application (Express, Fastify, NestJS, Koa, Hono, Next.js, tRPC, plain Node; JS or TS) for architectural, design, security, performance, and technical-debt issues via a phased, evidence-first workflow, then writes a prioritized Findings Report and a Remediation Backlog with exact before/after code changes."
     }
   ]
 }

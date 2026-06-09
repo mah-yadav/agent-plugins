@@ -1,0 +1,23 @@
+{
+  "name": "java-app-advisor",
+  "version": "1.0.0",
+  "description": "Critically analyzes a Java application to find architectural, design, security, performance, and technical-debt issues, then writes two report files. Single skill (`java-app-advisor`) that runs a phased workflow — Phase 1 orient, Phase 2 scope, Phase 3 analyze five areas (architecture & design, security & dependencies, performance & configuration, testing & API, technical debt), Phase 4 Findings Report, Phase 5 Remediation Backlog with exact before/after code changes. Each area's detection playbook lives in an internal reference file; no user-invocable sub-skills. Supports Spring Boot, Micronaut, Quarkus, and plain Java (web, standalone, batch, CLI).",
+  "author": {
+    "name": "Mahesh Yadav"
+  },
+  "keywords": [
+    "java",
+    "code-review",
+    "architecture",
+    "security",
+    "owasp",
+    "performance",
+    "technical-debt",
+    "code-quality",
+    "audit",
+    "spring-boot",
+    "quarkus",
+    "micronaut",
+    "codebase-analysis"
+  ]
+}
